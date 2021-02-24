@@ -1,0 +1,30 @@
+﻿@model SRMMVC2_.Models.Classes.Invoice
+@{
+    ViewBag.Title = "GetInvoice";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+
+@using (Html.BeginForm("UpdateInvoice", "Invoice", FormMethod.Post))
+{
+
+    @Html.HiddenFor(x => x.InvoiceId)
+
+    <div class="card">
+        <h5 class="card-header">Fiş Güncelle</h5>
+        <div class="card-body">
+            <div class="row">
+                <p class="col-12 mt-2 font-weight-bold"> Tarih</p>
+                @Html.TextBoxFor(x => x.Date, new { @class = "form-control col-12 ml-2" })
+                <p class="col-12 mt-2 font-weight-bold"> Personel</p>
+                @Html.DropDownListFor(x => x.StaffId, (List<SelectListItem>)ViewBag.val3, new { @class = "form-control col-12 ml-2" })
+                <p class="col-12 mt-2 font-weight-bold"> Müşteri</p>
+                @Html.DropDownListFor(x => x.ClientId, (List<SelectListItem>)ViewBag.val2, new { @class = "form-control col-12 ml-2" })
+            </div>
+        </div>
+        <br />
+        <button class="btn btn-warning">Güncelle</button>
+    </div>
+
+}

@@ -1,0 +1,144 @@
+﻿@using SRMMVC2_.Models.Classes
+@model List<Category>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<a style="float:right" href="/Category/AddCategory" class="btn btn-primary">Yeni Kategori</a>
+<br />
+<br />
+<table id="tblcategory" class="table-bordered  table-hover" style="width:100%;margin-top:15px;">
+    <thead>
+        <tr>
+            <th style="width:10%;">ID</th>
+            <th style="width:90%;">Kategori</th>
+            <th style="width:1%;"></th>
+            <th style="width:15%;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model)
+        {
+            <tr>
+
+                <td>@i.CategoryId</td>
+                <td>@i.CategoryName</td>
+                <td><button href="/Category/RemoveCategory/@i.CategoryId" onclick="confirmDelete(@i.CategoryId)" class="btn btn-danger delete">Sil</button></td>
+                <td><a href="/Category/GetCategory/@i.CategoryId" class="btn btn-success">Güncelle</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h3 class="modal-title">Delete Employee</h3>
+            </div>
+            <div class="modal-body">
+                <h4>Bu kategoriyi silmek istediğinize emin misiniz?</h4>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Vazgeç</a>
+                <a href="#" class="btn btn-success" onclick="DeleteEmployee(this.CategoryId)">Onayla</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<input type="hidden" id="hiddenEmployeeId" />
+
+
+<link href="~/attention.js-master/dist/attention.css" rel="stylesheet" />
+<script src="~/attention.js-master/dist/attention.js"></script>
+
+
+<script>
+    function confirmDelete(val) {
+        var deger = val
+
+            new Attention.Confirm({
+                title: 'Uyarı',
+                content: 'Bu kategoriyi silmek isteidğinize  emin misiniz?',
+                onCancel: function (component) {
+
+                },
+                onConfirm: function (component) {
+                    var url = '@Url.Action("RemoveCategory", "Category", new { id = "__id__" })';
+                    window.location.href = url.replace('__id__', val);
+                }
+            });
+
+
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"></link>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+
+<script>
+
+    $('#tblcategory').dataTable({
+        buttons: ['Kopyala'],
+        "responsive": true,
+        "dom": '<"html5buttons"B>lTfgitp',
+
+        "language": {
+            "emptyTable": "Gösterilecek ver yok.",
+            "processing": "Veriler yükleniyor",
+            "sDecimal": ".",
+            "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+            "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ".",
+            "sLengthMenu": "Sayfada _MENU_ kayıt göster",
+            "sLoadingRecords": "Yükleniyor...",
+            "sSearch": "Ara:",
+            "sZeroRecords": "Eşleşen kayıt bulunamadı",
+            "oPaginate": {
+                "sFirst": "İlk",
+                "sLast": "Son",
+                "sNext": "Sonraki",
+                "sPrevious": "Önceki"
+            },
+            "oAria": {
+                "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+            },
+            "select": {
+                "rows": {
+                    "_": "%d kayıt seçildi",
+                    "0": "",
+                    "1": "1 kayıt seçildi"
+                }
+            }
+        }
+
+
+    });
+</script>

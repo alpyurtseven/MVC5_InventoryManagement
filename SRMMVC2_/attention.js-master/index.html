@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>attention.js - Demo</title>
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+        <link href="dist/attention.css" rel="stylesheet">
+        <style>
+
+        html {
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+        .intro {
+            position: relative;
+            text-align: center;
+            padding: 100px 20px;
+        }
+        .examples {
+            position: relative;
+            text-align: center;
+            padding: 0 20px;
+        }
+        .examples .button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #fff;
+        }
+        .examples .new-alert {
+            background-color: #143642;
+        }
+        .examples .new-prompt {
+            background-color: #EC9A29;
+        }
+        .examples .new-confirm {
+            background-color: #A8201A;
+        }
+
+        </style>
+    </head>
+    <body>
+
+        <script src="dist/attention.js"></script>
+
+        <div class="intro">
+            <h1 class="title">attention.js</h1>
+            <p>Press one of the buttons to render a new component. Try it!</p>
+            <div class="demo">
+
+                <h2>Actions:</h2>
+
+            </div>
+        </div>
+
+        <div class="examples">
+
+            <button class="button new-alert">Alert</button>
+            <button class="button new-confirm">Confirm</button>
+            <button class="button new-prompt">Prompt</button>
+
+        </div>
+
+        <script>
+
+            const demo = document.querySelector('.demo');
+
+            document.querySelector('.new-alert').addEventListener('click', function() {
+                new Attention.Alert({
+                    title: 'Nice alert!',
+                    content: 'This is my content',
+                    afterClose: () => {
+                        demo.innerHTML += '<h4>Alert was closed</h4>';
+                    }
+                });
+            });
+
+            document.querySelector('.new-confirm').addEventListener('click', function() {
+                new Attention.Confirm({
+                    title: 'Nice confirm',
+                    content: '<h1>This is my content</h1>',
+                    useInnerHTML: true
+                });
+            });
+
+            document.querySelector('.new-prompt').addEventListener('click', function() {
+                new Attention.Prompt({
+                    title: 'Nice prompt',
+                    content: 'This is my content',
+                    onSubmit: function(component, value) {
+                        demo.innerHTML += `<h4>Prompt was submited by following value: ${value}</h4>`;
+                    }
+                });
+            });
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,39 @@
+﻿
+
+<table id="tblproduct4" class="table table-hover">
+    <thead>
+        <tr>
+            <th>Ürün Kodu</th>
+            <th >Ürün Adı</th>
+            <th >Stok</th>
+            <th >Renk</th>
+            <th >Metre</th>
+            <th >Alış Fiyatı</th>
+            <th >Satış Fiyatı</th>
+            <th>Görsel</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model)
+        {
+            if (i.CategoryId == 5)
+            { 
+                <tr>
+                    <td>@i.ProductCode</td>
+                    <td>@i.ProductName</td>
+                    <td>@i.Stock</td>
+                    <td>@i.Color</td>
+                    <td>@(i.Mt*i.Stock)</td>
+                    <td>@i.Pprice</td>
+                    <td>@i.Sprice</td>
+                    <td>@i.Image</td>
+                    <td><button onclick="confirmDelete(@i.ProductId)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td>
+                    <td><a href="/Product/GetProduct/@i.ProductId" class="btn btn-success" style="background-color: coral"><i class="fas fa-pen-alt"></i></a></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+

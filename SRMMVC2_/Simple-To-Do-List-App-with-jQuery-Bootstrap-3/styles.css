@@ -1,0 +1,38 @@
+.form-control {
+    display: inline-block;
+}
+
+.add_button {
+    margin: 10px 0px 10px 0px;
+}
+
+.checkbox {
+    margin-top: 20px;
+}
+
+.completed_item {
+    text-decoration: line-through;
+}
+
+h1 {
+    display: inline-block;
+    color: #292b33;
+}
+
+body {
+    background-color: #f6f6f6;
+}
+
+.text_holder {
+    display: block;
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+#main {
+    margin-top: 150px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    width: 50%;
+    border: 1px solid #545454;
+}

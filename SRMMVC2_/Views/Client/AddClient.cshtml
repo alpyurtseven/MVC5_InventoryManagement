@@ -1,0 +1,120 @@
+﻿@model SRMMVC2_.Models.Classes.Client
+@{
+    ViewBag.Title = "AddClient";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<form name="client" class="form-group" method="post" style="margin-top:5px;">
+    <div class="card">
+        <h5 class="card-header">Yeni Kategori Ekle</h5>
+        <div class="card-body">
+            <div class="row" style="padding-left: 5px">
+                <br />
+                <div class="row col-12">
+                    <p class="col-12 font-weight-bold" >Adı:</p>
+                    @Html.TextBoxFor(x => x.ClientName, new { @class = "form-control col-12 ml-2 " })
+                </div>
+                <div class="row col-12">
+                    <p class="col-12 mt-2 font-weight-bold">Soyadı:</p>
+                    @Html.TextBoxFor(x => x.ClientSurname, new { @class = "form-control col-12 ml-2" })
+                </div>
+                <div class="row col-12">
+                    <p class="col-12 mt-2 font-weight-bold">Adres:</p>
+                    @Html.TextBoxFor(x => x.ClientAddress, new { @class = "form-control col-12 ml-2" })
+                </div>
+                <div class="row col-12 ">
+                    <p class="col-12 mt-2 font-weight-bold">Mail:</p>
+                    @Html.TextBoxFor(x => x.ClientMail, new { @class = "form-control col-12 ml-2" })
+                </div>
+                <div class="row col-12">
+                    <p class="col-12 mt-2 font-weight-bold">Cep No:</p>
+                    @Html.TextBoxFor(x => x.PhoneNumber, new { @class = "form-control col-12 ml-2 ", @placeholder = "5XXXXXXXX" })
+                </div>
+                <div class="row col-12">
+                    <p class="col-12 mt-2 font-weight-bold">İş No:</p>
+                    @Html.TextBoxFor(x => x.PhoneNumber1, new { @class = "form-control col-12 ml-2", @placeholder = "5XXXXXXXX" })
+                </div>
+                <div class="row col-12">
+                    <p class="col-12 mt-2 font-weight-bold">Fax No:</p>
+                    @Html.TextBoxFor(x => x.PhoneNumber2, new { @class = "form-control col-12 ml-2", @placeholder = "5XXXXXXXX" })
+                </div>
+            </div>
+            </br>
+            <button class="btn btn-info">Kaydet</button>
+        </div>
+    </div>
+</form>
+<style>
+    label.error {
+        color: red;
+        margin-top: 15px;
+        margin-left: 10px;
+    }
+</style>
+<script>
+    $(function () {
+        jQuery.validator.addMethod("phoneUS", function (phone_number, element) {
+            phone_number = phone_number.replace(/\s+/g, "");
+            return this.optional(element) || phone_number.length > 9 &&
+                phone_number.match(/^(\+?1-?)?(\([2-9]\d{2}\)|[2-9]\d{2})-?[2-9]\d{2}-?\d{4}$/);
+        }, "Please specify a valid phone number");
+
+        // Initialize form validation on the registration form.
+        // It has the name attribute "registration"
+        $("form[name='client']").validate({
+            // Specify validation rules
+            rules: {
+                // The key name on the left side is the name attribute
+                // of an input field. Validation rules are defined
+                // on the right side
+                ClientName: "required",
+                ClientSurname: "required",
+                ClientName: "required",
+                ClientAddress: "required",
+                PhoneNumber: {
+                    required: true,
+                    phoneUS: true,
+                },
+                PhoneNumber1: {
+
+                    phoneUS: true,
+                },
+                PhoneNumber2: {
+
+                    phoneUS: true,
+                },
+
+                ClientMail: {
+                    required: true,
+                    // Specify that email should be validated
+                    // by the built-in "email" rule
+                    email: true
+                },
+                /* password: {
+                   required: true,
+                   minlength: 5
+                 }*/
+            },
+            // Specify validation error messages
+            messages: {
+                ClientName: "Müşteri adını Giriniz",
+                ClientSurname: "Müşteri Soyadını Giriniz",
+                PhoneNumber: "Geçerli Bir Numara Giriniz",
+                PhoneNumber1: "Geçerli Bir Numara Giriniz",
+                PhoneNumber2: "Geçerli Bir Numara Giriniz",
+                /*password: {
+                  required: "Please provide a password",
+                  minlength: "Your password must be at least 5 characters long"
+                },*/
+                ClientMail: "Doğru bir e-mail adresi giriniz"
+            },
+            // Make sure the form is submitted to the destination defined
+            // in the "action" attribute of the form when valid
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+    });
+</script>

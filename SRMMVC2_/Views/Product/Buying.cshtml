@@ -1,0 +1,85 @@
+﻿@model SRMMVC2_.Models.Classes.Product
+@{
+    ViewBag.Title = "Buying";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<link href="~/Scripts/component-chosen.min.css" rel="stylesheet" />
+@using (Html.BeginForm("Buying", "Product", FormMethod.Post, new { name = "product" }))
+{
+
+    <div class="card mt-5">
+        <h5 class="card-header">Ürün Al</h5>
+        <div class="card-body">
+            <div class="form-group">
+                <div class="row ">
+
+                    <div class="row col-12">
+                        <div class="col-12 font-weight-bold mt-2">
+                            <p>Ürün:</p>
+                        </div>
+                        <div class="col-12">
+                            @Html.DropDownListFor(x => x.ProductId, (List<SelectListItem>)ViewBag.catval, new { @class = "form-control chosen-container" })
+                        </div>
+                    </div>
+                    <div class="row col-12">
+                        <div class="col-12 font-weight-bold mt-2">
+                            <p>Stok Miktarı:</p>
+                        </div>
+                        <div class="col-12 ">
+                            @Html.TextBoxFor(x => x.Stock, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    @Html.HiddenFor(x => x.Mkg)
+                 
+
+                </div>
+                    <p class="col-12"></p>
+                    <button class="btn btn-info col-12 mt-2">Kaydet</button>
+                </div>
+            </div>
+
+        </div>
+ 
+
+}
+<style>
+    label.error {
+        color: red;
+        margin-top: 15px;
+        margin-left: 10px;
+    }
+</style>
+<script>
+   
+     
+
+    $("#ProductId").chosen();
+    $("#ProductId").css("width", "50px")
+
+
+    $(function () {
+
+        $("form[name='category']").validate({
+            // Specify validation rules
+            rules: {
+                // The key name on the left side is the name attribute
+                // of an input field. Validation rules are defined
+                // on the right side
+                Stock: "required",
+                Stock: "number",
+            },
+            // Specify validation error messages
+            messages: {
+                Stock: "Stok Miktarını Doğru Giriniz",
+
+            },
+            // Make sure the form is submitted to the destination defined
+            // in the "action" attribute of the form when valid
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+    });
+</script>

@@ -1,0 +1,262 @@
+﻿@model SRMMVC2_.Models.Classes.Product
+@{
+    ViewBag.Title = "GetProduct";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="~/Scripts/chosen.jquery.min.js"></script>
+<link href="~/Scripts/component-chosen.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<br />
+@using (Html.BeginForm("UpdateProduct", "Product", FormMethod.Post, new { name = "product" }))
+{
+
+    @Html.HiddenFor(x => x.ProductId)
+<div class="card">
+    <h5 class="card-header">Ürün Güncelle</h5>
+    <div class="card-body">
+
+        <form name="product" class="form-group">
+            <div class="row ">
+                <div class="row col-12">
+                    <div class="col-12 font-weight-bold mt-2">
+                        <p>Ürün Kodu:</p>
+                    </div>
+                    <div class="col-12 ">
+                        @Html.TextBoxFor(x => x.ProductCode, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="row col-12">
+                    <div class="col-12 font-weight-bold mt-2">
+                        <p>Ürün Adı:</p>
+                    </div>
+                    <div class="col-12 ">
+                        @Html.TextBoxFor(x => x.ProductName, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="row col-12">
+                    <div class="col-12 font-weight-bold mt-2">
+                        <p>Stok Miktarı:</p>
+                    </div>
+                    <div class="col-12 ">
+                        @Html.TextBoxFor(x => x.Stock, new { @class = "form-control" })
+                    </div>
+
+                    <div class="row col-12">
+                        <div class="col-12 font-weight-bold mt-2">
+                            <p>Kritik Stok:</p>
+                        </div>
+                        <div class="col-12 ">
+                            @Html.TextBoxFor(x => x.CriticalPoint, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row col-12">
+                        <div class="col-12 font-weight-bold mt-2">
+                            <p>Alış Fiyatı:</p>
+                        </div>
+                        <div class="col-12 ">
+                            @Html.TextBoxFor(x => x.Pprice, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row col-12">
+                        <div class="col-12 font-weight-bold mt-2">
+                            <p>Satış Fiyatı:</p>
+                        </div>
+                        <div class="col-12 ">
+                            @Html.TextBoxFor(x => x.Sprice, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row col-12">
+                        <div class="col-12 font-weight-bold mt-2">
+                            <p>Kategori:</p>
+                        </div>
+                        <div class="col-12 ">
+                            @Html.DropDownListFor(x => x.CategoryId, (List<SelectListItem>)ViewBag.catval, new { @class = "form-control chosen-container", @id = "dropd" })
+                        </div>
+                    </div>
+                    <div id="metre" class="row col-12">
+                        <div class="col-12 font-weight-bold mt-2">
+                            <p>Boy metresi:</p>
+                        </div>
+                        <div class="col-12 ">
+                            @Html.TextBoxFor(x => x.Mt, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div id="color" class="row col-12">
+                    <div class="col-12 font-weight-bold mt-2">
+                        <p>Ürün Rengi:</p>
+                    </div>
+                    <div class="col-12">
+
+                        @Html.TextBoxFor(x => x.Color, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div id="mkg" class="row col-12">
+                    <div class="col-12 font-weight-bold mt-2">
+                        <p>m/kg:</p>
+                    </div>
+                    <div class="col-12 ">
+                        @Html.TextBoxFor(x => x.Mkg, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div id="width" class="row col-12">
+                    <div class="col-12 font-weight-bold mt-2">
+                        <p>Genişlik</p>
+                    </div>
+                    <div class="col-12 ">
+                        @Html.TextBoxFor(x => x.Width, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div id="height" class="row col-12">
+                    <div class="col-12 font-weight-bold mt-2">
+                        <p>Yükseklik:</p>
+                    </div>
+                    <div class="col-12 ">
+                        @Html.TextBoxFor(x => x.Height, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="row col-12">
+                    <div class="col-12 font-weight-bold mt-2">
+                        <p>Ürün Görseli:</p>
+                    </div>
+                    <div class="col-12">
+
+                        @Html.TextBoxFor(x => x.Image, new { @class = "form-control" })
+                    </div>
+                </div>
+                <p class="col-12"></p>
+
+                @Html.HiddenFor(x => x.Status)
+                <button class="btn btn-warning col-12">Güncelle</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+}
+<style>
+    label.error {
+        color: red;
+        margin-top: 15px;
+        margin-left: 10px;
+    }
+</style>
+
+<script>
+    function hideOnLoad() {
+        var value = $('#dropd').val();
+
+        if (value == 1) {
+            $('#height').hide();
+            $('#width').hide();
+            $('#metre').hide();
+            $('#mkg').hide();
+        } else if (value == 2) {
+            $('#height').hide();
+            $('#width').hide();
+        } else if (value == 3) {
+            $('#height').hide();
+            $('#width').hide();
+            $('#metre').hide();
+            $('#mkg').hide();
+        } else if (value == 4) {
+            $('#metre').hide();
+            $('#mkg').hide();
+        } else if (value == 5) {
+            $('#height').hide();
+            $('#width').hide();
+
+        }
+        
+      
+    }
+
+    $(document).ready(function () {
+        hideOnLoad(); // add this line
+        $('#dropd').change(function () {
+
+            var value = $(this).val();
+            console.log(value)
+            if (value == '1') {
+                $('#height').hide();
+                $('#width').hide();
+                $('#metre').hide();
+                $('#mkg').hide();
+                $('#color').show();
+            } else if (value == '2') {
+                $('#height').hide();
+                $('#width').hide();
+                $('#metre').show();
+                $('#mkg').show();
+                $('#color').show();
+            }
+            else if (value == '3') {
+                $('#height').hide();
+                $('#width').hide();
+                $('#metre').hide();
+                $('#mkg').hide();
+                $('#color').hide();
+            }
+            else if (value == '4') {
+                $('#height').show();
+                $('#width').show();
+                $('#metre').hide();
+                $('#mkg').hide();
+                $('#color').show();
+            } else if (value == '5') {
+                $('#height').hide();
+                $('#width').hide();
+                $('#metre').show();
+                $('#mkg').hide();
+                $('#color').show();
+            }
+
+            else {
+                hideOnLoad();
+            }
+        });
+    });
+
+
+    $('#dropd').chosen();
+    $(function () {
+
+        $("form[name='product']").validate({
+
+            rules: {
+                ProductCode: "required",
+                ProductName: "required",
+                Stock: {
+                    required: true,
+                    number: true,
+                },
+                Mkg: {
+                    required: true,
+                    number: true,
+                },
+                CriticalPoint: "required",
+                Pprice: {
+                    required: true,
+                    number: true,
+                },
+                Sprice: {
+                    required: true,
+                    number: true,
+                },
+            },
+            messages: {
+                ProductCode: "Ürün Kodu Giriniz",
+                ProductName: "Ürün Adı Giriniz.",
+                Stock: "Stok Giriniz.",
+                Mkg: "Sadece eakam Giriniz.",
+                CriticalPoint: "Kritik Nokta Giriniz.",
+                Pprice: "Alış Fiyatı Giriniz",
+                Sprice: "Satış Fiyatını Giriniz",
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+    });
+</script>

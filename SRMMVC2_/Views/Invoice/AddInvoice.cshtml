@@ -1,0 +1,20 @@
+﻿@model SRMMVC2_.Models.Classes.Invoice
+@{
+    ViewBag.Title = "AddInvoice";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form method="post">
+    <br />
+    <div class="row">
+        <div class="col-12">
+            <p><b>Müşteri1 Seç:</b></p>
+        </div>
+        <div class="col-10">
+            @Html.DropDownListFor(x => x.ClientId, (List<SelectListItem>)ViewBag.val2, new { @class = "form-control" })
+        </div>
+        <div class="col">
+            <button class="btn btn-info">Fiş Oluştur</button>
+        </div>
+    </div>
+</form>

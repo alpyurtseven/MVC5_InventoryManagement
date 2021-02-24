@@ -1,0 +1,36 @@
+﻿@model SRMMVC2_.Models.Classes.Sale
+@{
+    ViewBag.Title = "GetSale";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+@using (Html.BeginForm("UpdateSale", "Sale", FormMethod.Post))
+{
+    <div class="card">
+        <h5 class="card-header">Satış Güncelle</h5>
+        <div class="card-body">
+            <div class="row" style="padding-left: 5px">
+
+                @Html.HiddenFor(x => x.SaleId)
+                <br />
+                <p class="col-12 font-weight-bold mt-2">Ürün Adı:</p>
+                @Html.DropDownListFor(x => x.Productid, (List<SelectListItem>)ViewBag.val1, new { @class = "form-control col-12 ml-2" })
+                <p class="col-12 font-weight-bold mt-2">Müşteri:</p>
+                @Html.DropDownListFor(x => x.Clientid, (List<SelectListItem>)ViewBag.val2, new { @class = "form-control col-12 ml-2" })
+                <p class="col-12 font-weight-bold mt-2">Personel:</p>
+                @Html.DropDownListFor(x => x.Staffid, (List<SelectListItem>)ViewBag.val3, new { @class = "form-control col-12 ml-2" })
+                <p class="col-12 font-weight-bold mt-2">Adet:</p>
+                @Html.TextBoxFor(x => x.Piece, new { @class = "form-control col-12 ml-2" })
+                <p class="col-12 font-weight-bold mt-2">Fiyat:</p>
+                @Html.TextBoxFor(x => x.Price, new { @class = "form-control col-12 ml-2" })
+                <p class="col-12 font-weight-bold mt-2">Toplam Tutar:</p>
+                @Html.TextBoxFor(x => x.TotalPrice, new { @class = "form-control col-12 ml-2" })
+                <p class="col-12 font-weight-bold mt-2">Tarih:</p>
+                @Html.TextBoxFor(x => x.Date, new { @class = "form-control col-12 ml-2" })
+            </div>
+            <br />
+            <button class="btn btn-warning">Güncelle</button>
+        </div>
+    </div>
+
+}

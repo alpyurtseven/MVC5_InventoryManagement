@@ -1,0 +1,37 @@
+{
+  "name": "attention",
+  "version": "0.1.0",
+  "description": "A vanilla js library for creating stylish alerts, prompts and confirms.",
+  "main": "dist/js/attention.js",
+  "scripts": {
+    "dev": "rollup -c rollup.config.js -w",
+    "style": "node-sass src/sass/index.scss dist/attention.css -w  --output-style=compressed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/janmarkuslanger/attention.js.git"
+  },
+  "keywords": [
+    "notification",
+    "prompt",
+    "confirm",
+    "alert"
+  ],
+  "author": "Jan-Markus Langer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/janmarkuslanger/attention.js/issues"
+  },
+  "homepage": "https://github.com/janmarkuslanger/attention.js#readme",
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "rollup": "^1.32.1",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-node-resolve": "^4.2.4",
+    "rollup-plugin-uglify": "^6.0.4"
+  },
+  "dependencies": {
+    "node-sass": "^4.14.1"
+  }
+}

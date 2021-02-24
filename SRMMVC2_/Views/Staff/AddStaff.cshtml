@@ -1,0 +1,56 @@
+﻿@model SRMMVC2_.Models.Classes.Staff
+@{
+    ViewBag.Title = "AddStaff";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<form name="staff" class="form-group" method="post">
+    <div class="card">
+        <h5 class="card-header">Personel Ekle</h5>
+        <div class="card-body">
+            <div class="row">
+                <div class="row col-12">
+                    <p class="col-12 font-weight-bold mt-2">Adı:</p>
+                    @Html.TextBoxFor(x => x.StaffName, new { @class = "form-control col-12 ml-2" })
+                </div>
+                <div class="row col-12">
+                    <p class="col-12 font-weight-bold mt-2">Soyadı:</p>
+                    @Html.TextBoxFor(x => x.StaffSurname, new { @class = "form-control col-12 ml-2" })
+                </div>
+            </div>
+            <br />
+        </div>
+
+        <button class="btn btn-info">Kaydet</button>
+    </div>
+</form>
+<style>
+    label.error {
+        color: red;
+        margin-top: 15px;
+        margin-left: 10px;
+    }
+</style>
+<script>
+    $(function () {
+        $("form[name='staff']").validate({
+            // Specify validation rules
+            rules: {
+                StaffName: "required",
+                StaffSurname: "required",
+            },
+            // Specify validation error messages
+            messages: {
+                StaffName: "Personel Adı Giriniz.",
+                StaffSurname: "Personel Soyadı Giriniz.",
+            },
+            // Make sure the form is submitted to the destination defined
+            // in the "action" attribute of the form when valid
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+    });
+</script>

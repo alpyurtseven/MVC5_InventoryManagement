@@ -1,0 +1,56 @@
+﻿@model SRMMVC2_.Models.Classes.Category
+@{
+    ViewBag.Title = "AddCategory";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+</br>
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<form name="category" class="form-group" method="post">
+    <div class="card">
+        <h5 class="card-header">Yeni Kategori Ekle</h5>
+        <div class="card-body">
+            <div id="category" class="row" style="padding-left: 5px">
+                <br />
+                <p class="col-12 mt-2"> <b>Kategori Adı:</b></p>
+                <div class="col-12">
+                    @Html.TextBoxFor(x => x.CategoryName, new { @class = "form-control col-12 " })
+                </div>
+            </div>
+            </br>
+        </div>
+        <button class="btn btn-info">Kaydet</button>
+    </div>
+</form>
+<style>
+    label.error {
+        color: red;
+        margin-top: 15px;
+        margin-left: 10px;
+    }
+</style>
+<script>
+
+    $(function () {
+
+        $("form[name='category']").validate({
+            // Specify validation rules
+            rules: {
+                // The key name on the left side is the name attribute
+                // of an input field. Validation rules are defined
+                // on the right side
+                CategoryName: "required",
+            },
+            // Specify validation error messages
+            messages: {
+                CategoryName: "Kategori Adını Giriniz",
+
+            },
+            // Make sure the form is submitted to the destination defined
+            // in the "action" attribute of the form when valid
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+    });
+</script>

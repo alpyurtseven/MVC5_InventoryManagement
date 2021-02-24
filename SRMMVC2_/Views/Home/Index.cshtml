@@ -1,0 +1,219 @@
+﻿@model SRMMVC2_.Models.Classes.CurrencyDetail
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+
+<link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css'>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="card text-center" style="height: 100%">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-10 mt-2"><input style="float: left" type="text" class="form-control" id="custom_textbox" name="Item" placeholder="What do you need to do?"></div>
+                    <div class="col-2 mt-2">
+                        <input style="float: left" type="submit" value="Ekle" class="btn btn-primary add_button" id="add_todo">
+                    </div>
+                    <div class="col-12">
+                        <ol class="list-group list_of_items">
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                Yapılacaklar
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <!-- Card -->
+
+        <div class="row">
+
+            <div data-target="#exampleModal" class="card col-6" style="max-width: 540px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4" style="background-color:#f2594e">
+                        <!--<img id="crit" style="margin: 2px" width="95%" src="~/Web/src/img/dec.png" />-->
+                        <button type="button" class="btn" style="height:100%;background-color:#f2594e;width:100% " data-toggle="modal" data-target="#exampleModal">
+                            <i class="fas fa-angle-double-down"></i>
+                        </button>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Stoğu Azalanlar</h5>
+                            <p class="card-text">@ViewBag.sd</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card col-6" style="max-width: 540px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4" style="background-color: blueviolet">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title"></h5>
+                            <p class="card-text">@Model.Degerler[0].Name</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card col-6" style="max-width: 540px; margin-top: 4px">
+                <div class="row no-gutters">
+                    <div class="col-md-4" style="background-color: blueviolet">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">@Model.Degerler[0].Name</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card col-6" style="max-width: 540px; margin-top: 4px">
+                <div class="row no-gutters">
+                    <div class="col-md-4" style="background-color: blueviolet">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">@Model.Degerler[0].Name</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card -->
+    </div>
+</div>
+<br />
+<br />
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+    </ol>
+</nav>
+<br />
+<div class="row">
+    <div class="col-12 mt-2">
+        <div class="card panels-card">
+
+            <!--Navbar-->
+            <nav class="navbar navbar-expand-lg navbar-dark grey lighten-5 d-flex justify-content-between z-depth-1-bottom">
+
+                <div>
+                    <ul class="list-inline my-2 py-1 dark-grey-text">
+                        <li class="list-inline-item">
+                            <i class="fas fa-exchange-alt" aria-hidden="true"></i>
+                        </li>
+                        <li class="list-inline-item font-weight-bold text-uppercase">
+                            Kurlar
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="card-body grey lighten-5 rounded-bottom">
+                <div class="row">
+
+                    <!-- Grid column -->
+                    <div class="col-6 p-1">
+
+                        <div class="card orange lighten-3">
+                            <div class="card-body pb-0">
+                                <i class="fas fa-dollar-sign fa-3x pb-4"></i>
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0 h5">Satış: @Model.Degerler[0].Satis</p>
+                                    <p class="mb-0 hour">@Model.Degerler[0].Tarih</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="card-body pt-0">
+                                <h6 class="font-weight-bold mb-1">@Model.Degerler[0].Name</h6>
+                                <p class="mb-0">Alış: @Model.Degerler[0].Alis</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-6 p-1">
+
+                        <div class="card indigo white-text">
+                            <div class="card-body pb-0">
+                                <i class="fas fa-euro-sign fa-3x pb-4"></i>
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0 h5">Satış: @Model.Degerler[1].Satis</p>
+                                    <p class="mb-0 hour">@Model.Degerler[1].Tarih</p>
+                                </div>
+                            </div>
+                            <hr class="hr-light">
+                            <div class="card-body pt-0">
+                                <h6 class="font-weight-bold mb-1">@Model.Degerler[1].Name</h6>
+                                <p class="mb-0">Alış: @Model.Degerler[1].Alis</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="stockmodel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script>
+
+    $('#add_todo').click(function () {
+
+    });
+
+    $("#crit").on("click", function () {
+        console.log("a");
+        $('#stockmodel').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
+    });
+</script>

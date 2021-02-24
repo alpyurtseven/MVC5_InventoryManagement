@@ -1,0 +1,291 @@
+﻿@using SRMMVC2_.Models.Classes
+@model List<Product>
+@{
+
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<br />
+
+<a style="float:right" href="/Product/AddProduct" class="btn btn-primary">Yeni Ürün</a>
+<a style="float:right;margin-right:5px;" href="/Product/Buying" class="btn btn-outline-success">Alış</a>
+<br />
+<br />
+
+<link href="~/Web/productab.css" rel="stylesheet" />
+<div class="tabset">
+    <!-- Tab 1 -->
+    <input type="radio" name="tabset" id="tab1" aria-controls="profil" checked>
+    <label for="tab1">Profil</label>
+    <!-- Tab 2 -->
+    <input type="radio" name="tabset" id="tab2" aria-controls="aksesuar">
+    <label for="tab2">Aksesuar</label>
+    <!-- Tab 3 -->
+    <input type="radio" name="tabset" id="tab3" aria-controls="kompozit">
+    <label for="tab3">Kompozit</label>
+    <!-- Tab 4 -->
+    <input type="radio" name="tabset" id="tab4" aria-controls="pvc">
+    <label for="tab4">PVC</label>
+    <!-- Tab 5 -->
+    <input type="radio" name="tabset" id="tab5" aria-controls="kompozit">
+    <label for="tab5">Fitil</label>
+    <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+    <div class="tab-panels">
+        <section id="profil" class="tab-panel">
+            @Html.Partial("Profil_Aksesuar")
+        </section>
+        <section id="aksesuar" class="tab-panel">
+            @Html.Partial("Aksesuar")
+        </section>
+        <section id="kompozit" class="tab-panel">
+            @Html.Partial("Kompozit")
+        </section>
+        <section id="pvc" class="tab-panel">
+            @Html.Partial("PVC")
+        </section>
+        <section id="kompozit" class="tab-panel">
+            @Html.Partial("Fitil")
+        </section>
+    </div>
+
+</div>
+
+<script>
+
+
+
+
+</script >
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"></link>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<link href="~/attention.js-master/dist/attention.css" rel="stylesheet" />
+<script src="~/attention.js-master/dist/attention.js"></script>
+<script>
+    function confirmDelete(val) {
+        var deger = val
+
+            new Attention.Confirm({
+                title: 'Uyarı',
+                content: 'Bu ürünü silmek isteidğinize  emin misiniz?',
+                onCancel: function (component) {
+
+                },
+                onConfirm: function (component) {
+                    var url = '@Url.Action("RemoveProduct", "Product", new { id = "__id__" })';
+                    window.location.href = url.replace('__id__', val);
+                }
+            });
+
+
+    }
+</script>
+
+
+<script>
+    function changeCategory() {
+
+    }
+
+
+</script>
+
+
+
+
+
+
+<script>
+
+    $('document').ready(function () {
+     
+        $('#tblproduct').dataTable({
+            buttons: ['Kopyala'],
+            "responsive": true,
+            "dom": '<"html5buttons"B>lTfgitp',
+
+            "language": {
+                "emptyTable": "Gösterilecek ver yok.",
+                "processing": "Veriler yükleniyor",
+                "sDecimal": ".",
+                "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+                "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada _MENU_ kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "0": "",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            }
+
+        });
+        $('#tblproduct1').dataTable({
+            buttons: ['Kopyala'],
+            "responsive": true,
+            "dom": '<"html5buttons"B>lTfgitp',
+
+            "language": {
+                "emptyTable": "Gösterilecek ver yok.",
+                "processing": "Veriler yükleniyor",
+                "sDecimal": ".",
+                "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+                "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada _MENU_ kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "0": "",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            }
+
+        });
+        $('#tblproduct2').dataTable({
+            buttons: ['Kopyala'],
+            "responsive": true,
+            "dom": '<"html5buttons"B>lTfgitp',
+
+            "language": {
+                "emptyTable": "Gösterilecek ver yok.",
+                "processing": "Veriler yükleniyor",
+                "sDecimal": ".",
+                "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+                "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada _MENU_ kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "0": "",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            }
+
+        });
+        $('#tblproduct3').dataTable({
+            buttons: ['Kopyala'],
+            "responsive": true,
+            "dom": '<"html5buttons"B>lTfgitp',
+
+            "language": {
+                "emptyTable": "Gösterilecek ver yok.",
+                "processing": "Veriler yükleniyor",
+                "sDecimal": ".",
+                "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+                "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada _MENU_ kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "0": "",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            }
+
+        });
+        $('#tblproduct4').dataTable({
+            buttons: ['Kopyala'],
+            "responsive": true,
+            "dom": '<"html5buttons"B>lTfgitp',
+
+            "language": {
+                "emptyTable": "Gösterilecek ver yok.",
+                "processing": "Veriler yükleniyor",
+                "sDecimal": ".",
+                "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+                "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada _MENU_ kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "0": "",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            }
+
+        });
+    });
+</script>

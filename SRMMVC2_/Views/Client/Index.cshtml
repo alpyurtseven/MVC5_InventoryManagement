@@ -1,0 +1,139 @@
+﻿@using SRMMVC2_.Models.Classes
+@model List<Client>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<a style="float: right" href="/Client/AddClient" class="btn btn-primary">Müşteri Ekle</a>
+<br />
+<br />
+
+<table id="tblclient" class="table table-hover" style="width:100%;margin-top:15px;">
+    <thead>
+        <tr>
+            <th>
+                Adı
+            </th>
+            <th>
+                Soyadı
+            </th>
+            <th>
+                Adres
+            </th>
+            <th>
+                Mail
+            </th>
+            <th>Cep No</th>
+            <th>İş No</th>
+            <th>Faks No</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <td>
+                    @i.ClientName
+                </td>
+                <td>
+                    @i.ClientSurname
+                </td>
+                <td>
+                    @i.ClientAddress
+                </td>
+                <td>
+                    @i.ClientMail
+                </td>
+                <td>
+                    @i.PhoneNumber
+                </td>
+                <td>
+                    @i.PhoneNumber1
+                </td>
+                <td>
+                    @i.PhoneNumber2
+                </td>
+                <td style="width:3%">
+                    <button onclick="confirmDelete(@i.ClientId)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                </td>
+                <td style="width:5%">
+                    <a href="/Client/GetClient/@i.ClientId" class="btn btn-success"><i class="fas fa-pen-alt"></i></a>
+                </td>
+                <td style="width:5%">
+                    <a href="/Client/SalesLog/@i.ClientId" class="btn btn-default" style="background-color:coral;color:white"><i class="fa fa-search-plus"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"></link>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<link href="~/attention.js-master/dist/attention.css" rel="stylesheet" />
+<script src="~/attention.js-master/dist/attention.js"></script>
+<script>
+    function confirmDelete(val) {
+        var deger = val
+
+            new Attention.Confirm({
+                title: 'Uyarı',
+                content: 'Bu müşteriyi silmek isteidğinize  emin misiniz?',
+                onCancel: function (component) {
+
+                },
+                onConfirm: function (component) {
+                    var url = '@Url.Action("RemoveClient", "Client", new { id = "__id__" })';
+                    window.location.href = url.replace('__id__', val);
+                }
+            });
+
+
+    }
+</script>
+
+
+<script>
+    $('#tblclient').dataTable({
+        buttons: ['Kopyala'],
+        "responsive": true,
+        "dom": '<"html5buttons"B>lTfgitp',
+
+        "language": {
+            "emptyTable": "Gösterilecek ver yok.",
+            "processing": "Veriler yükleniyor",
+            "sDecimal": ".",
+            "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+            "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ".",
+            "sLengthMenu": "Sayfada _MENU_ kayıt göster",
+            "sLoadingRecords": "Yükleniyor...",
+            "sSearch": "Ara:",
+            "sZeroRecords": "Eşleşen kayıt bulunamadı",
+            "oPaginate": {
+                "sFirst": "İlk",
+                "sLast": "Son",
+                "sNext": "Sonraki",
+                "sPrevious": "Önceki"
+            },
+            "oAria": {
+                "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+            },
+            "select": {
+                "rows": {
+                    "_": "%d kayıt seçildi",
+                    "0": "",
+                    "1": "1 kayıt seçildi"
+                }
+            }
+        }
+
+    });
+</script>

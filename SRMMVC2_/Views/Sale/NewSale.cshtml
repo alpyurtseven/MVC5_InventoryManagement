@@ -1,0 +1,178 @@
+﻿@using System.Security.Cryptography.X509Certificates
+@using System.Web.UI.WebControls
+@using SRMMVC2_.Models.Classes
+@model  SRMMVC2_.Models.Classes.InvoiceP
+@{
+    ViewBag.Title = "NewSale";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<link href="~/Scripts/component-chosen.min.css" rel="stylesheet" />
+<div class="card">
+    <h5 class="card-header">Satış Yap</h5>
+    <div class="card-body">
+        @using (Html.BeginForm("AddP", "InvoiceP", FormMethod.Post, new { name = "sale" }))
+        {
+
+            <div id="TextBoxContainer">
+                <div id="product" class="row mt-2 product">
+                    <div class="row col-4 prodid" id="prodid">
+                        @Html.DropDownListFor(x => x.ProductId, (List<SelectListItem>)ViewBag.val1, new { @class = "form-control col-12" })
+                    </div>
+
+                    @Html.TextBoxFor(x => x.Quantity, new { @class = "form-control col-2", @placeholder = "Adet", @type = "number" })
+
+                    @Html.TextBoxFor(x => x.UnitPrice, new { @class = "form-control col-2", @placeholder = "Birim Fiyat", @type = "number" })
+
+                    @Html.TextBoxFor(x => x.Price, new { @class = "form-control col-3", @readonly = "true", @placeholder = "Toplam Fiyat" })
+
+                    @Html.HiddenFor(x => x.InvoiceId, new { @Value = TempData["a"] })
+                    <button name="remove" formaction="javascript:void(0)" class="btn btn-danger">Sil</button>
+                </div>
+            </div>
+            <input type="submit" onclick="return valForm();" class="btn btn-success  mt-2 float-left" style="margin-left:-12px;" value="Satışı Tamamla" />
+
+
+        }
+        <button class="btn btn-info mr-3 mt-2 float-right"  onclick="addColumn()"> Ürün Ekle</button>
+    </div>
+</div>
+
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<style>
+    label.error {
+        color: red;
+        margin-top: 15px;
+        margin-left: 10px;
+    }
+</style>
+
+<script type="text/javascript">
+    $(document).on('focus', "#Quantity", function () {
+        toDefault($(this));
+    });
+    $(document).on('focus', "#UnitPrice", function () {
+        toDefault($(this));
+    });
+    $(this).children("#Quantity").bind('paste', function (e) {
+        setTimeout(function () { $(this).keyup(); }, 30);
+    });
+    $(this).children("#UnitPrice").keyup(function (e) {
+        valForm();
+    });
+    $(this).children("#Quantity").keyup(function (e) {
+        valForm();
+    });
+    $(this).children("#UnitPrice").bind('paste', function (e) {
+        setTimeout(function () { $(this).keyup(); }, 30);
+    });
+
+    $("#ProductId").chosen();
+    $("#ProductId").css("width", "50px")
+    $(document).on("change", "#product", function () {
+        var a = $(this).children("#Quantity").val()
+        var b = $(this).children("#UnitPrice").val()
+        $(this).children("#Price").val(a * b);
+
+    });
+    $(document).on("mouseover", "#product", function () {
+        $(this).children("#Quantity").keyup(function (e) {
+            if ($(this).val().match(/[^0-9]/g, '')) {
+                $("#errmsg").html("Digits Only").show().fadeOut("slow");
+                $(this).val($(this).val().replace(/[^0-9]/g, ''));
+
+                errorflag = 1;
+            }
+        });
+        $(this).children("#Quantity").bind('paste', function (e) {
+            setTimeout(function () { $(this).keyup(); }, 30);
+        });
+        $(this).children("#UnitPrice").keyup(function (e) {
+
+            if ($(this).val().match(/[^0-9]/g, '')) {
+                $("#errmsg").html("Digits Only").show().fadeOut("slow");
+                $(this).val($(this).val().replace(/[^0-9]/g, ''));
+                errorflag = 1;
+            }
+        });
+        $(this).children("#UnitPrice").bind('paste', function (e) {
+            setTimeout(function () { $(this).keyup(); }, 30);
+        });
+
+    });
+
+    var sayac = 0;
+    $(document).on("mouseover", "#prodid", function () {
+
+        $(this).children("#ProductId").chosen();
+        $(this).children("#ProductId").next().next().remove();
+
+    });
+    var i = 1;
+    //  var id = "#prod" + i;
+    var original = document.getElementById('product');
+
+    $(document).on("click", "button.btn-danger", function () {
+        var id = $(this).parent().remove();
+        --i;
+    });
+
+    window.onkeydown = function (e) {
+        var code = e.keyCode ? e.keyCode : e.which;
+        if (code === 38) { //up key
+            console.log($("input[name=Quantity]").val());
+            var clone = original.cloneNode(true); // "deep" clone
+
+            if (i < 12) {
+                //   clone.id = "prod" + ++i; // there can only be one element with an ID7
+                i++;
+
+                original.parentNode.appendChild(clone);
+
+            };
+
+        };
+    };
+
+    function addColumn() {
+        console.log($("input[name=Quantity]").val());
+        var clone = original.cloneNode(true); // "deep" clone
+
+        if (i < 12) {
+            //   clone.id = "prod" + ++i; // there can only be one element with an ID7
+            i++;
+
+            original.parentNode.appendChild(clone);
+
+        };
+    }
+
+
+    function valForm() {
+
+        var count = 0;
+        var e = $("form input[type=number]").each(function () {
+            //$(this).find('input[name=Quantity]') //<-- Should return all input elements in that specific form.
+        });
+        console.log(e);
+
+        for (var i = 0; i < e.length; i++) {
+            if (e[i].value == "") {
+                e[i].style.color = "#5C3D00";
+                e[i].style.background = "#FFFF99";
+                e[i].style.border = "3px solid #ff0000";
+                count++;
+            }
+        }
+
+        if (count > 0)
+            return false;
+    }
+    function toDefault(x) {
+        console.log(x);
+        x[0].style.color = "black";
+        x[0].style.border = "1px solid #aaa";
+        x[0].style.background = "#efefef";
+    }
+</script>
